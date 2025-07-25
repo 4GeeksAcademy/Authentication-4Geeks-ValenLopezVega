@@ -1,5 +1,4 @@
 import { useState } from "react"
-
 import { Link, useNavigate } from "react-router-dom"
 
 
@@ -10,12 +9,10 @@ const initialStateUser = {
     password: ""
 }
 
-
-export const Register = () => {
+export function Register() {
     const [user, setUser] = useState(initialStateUser)
 
     const navigate = useNavigate()
-
 
     const handleChange = ({ target }) => {
         setUser({
@@ -24,16 +21,13 @@ export const Register = () => {
         })
     }
 
-
     const handleSubmit = async (event) => {
-        event.preventDefault() // quitar burbujeo
-        // validar que el formulario tenga todos los datos 
+        event.preventDefault()
 
-        // const formData = new FormData()
-        // formData.append("email", user.email)
-        // formData.append("name", user.name)
-        // formData.append("lastname", user.lastname)
-        // formData.append("password", user.password)
+        if (!user.email || !user.name || !user.lastname || !user.password) {
+            alert("Por favor completa todos los campos.");
+            return;
+        }
 
         const url = import.meta.env.VITE_BACKEND_URL;
 
@@ -42,7 +36,7 @@ export const Register = () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            // body: formData
+
             body: JSON.stringify(user)
         })
 
@@ -57,9 +51,7 @@ export const Register = () => {
             alert("Error al registrar el usuario, si el problema perciste comunicalo a soporte")
         }
 
-
     }
-
 
     return (
         <div className="container">
@@ -83,7 +75,7 @@ export const Register = () => {
                         </div>
 
                         <div className="form-group mb-3">
-                            <label htmlFor="btnName">Apellido</label>
+                            <label htmlFor="btnLastname">Apellido</label>
                             <input
                                 type="text"
                                 placeholder="Jhon Doe"
@@ -97,7 +89,7 @@ export const Register = () => {
                         <div className="form-group mb-3">
                             <label htmlFor="btnEmail">Correo electronico: </label>
                             <input
-                                type="text"
+                                type="email"
                                 placeholder="eldeimian@email.com"
                                 className="form-control"
                                 id="btnEmail"

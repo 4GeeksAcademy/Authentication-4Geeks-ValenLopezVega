@@ -9,7 +9,7 @@ const initialStateUser = {
     password: ""
 }
 
-export const Login = () => {
+export function Login() {
     const [user, setUser] = useState(initialStateUser)
 
     const { dispatch, store } = useGlobalReducer()
@@ -27,7 +27,11 @@ export const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault()
 
-        // verificar que ambos datos esten en el formulario
+        if (!user.email || !user.password) {
+            alert("Por favor completa todos los campos.");
+            return;
+        }
+
         const url = import.meta.env.VITE_BACKEND_URL;
 
         const response = await fetch(`${url}/login`, {
@@ -37,6 +41,7 @@ export const Login = () => {
             },
             body: JSON.stringify(user)
         })
+
         const data = await response.json()
 
         if (response.ok) {
