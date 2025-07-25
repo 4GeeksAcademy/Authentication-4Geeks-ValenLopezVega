@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
-
 const initialStateUser = {
     email: "",
     name: "",
@@ -10,8 +9,8 @@ const initialStateUser = {
 }
 
 export function Register() {
-    const [user, setUser] = useState(initialStateUser)
 
+    const [user, setUser] = useState(initialStateUser)
     const navigate = useNavigate()
 
     const handleChange = ({ target }) => {
@@ -41,12 +40,16 @@ export function Register() {
         })
 
         if (response.status === 201) {
+
             setUser(initialStateUser)
+
             setTimeout(() => {
                 navigate("/login")
             }, 2000)
+
         } else if (response.status === 400) {
             alert("El usuario ya existe")
+
         } else {
             alert("Error al registrar el usuario, si el problema perciste comunicalo a soporte")
         }
@@ -56,7 +59,7 @@ export function Register() {
     return (
         <div className="container">
             <div className="row justify-content-center">
-                <h2 className="text-center my-3">Regisrate a Deimianland</h2>
+                <h2 className="text-center my-3">Registrarme</h2>
                 <div className="col-12 col-md-6" >
                     <form
                         className="border m-2 p-3"
@@ -87,7 +90,7 @@ export function Register() {
                         </div>
 
                         <div className="form-group mb-3">
-                            <label htmlFor="btnEmail">Correo electronico: </label>
+                            <label htmlFor="btnEmail">Correo electronico</label>
                             <input
                                 type="email"
                                 placeholder="eldeimian@email.com"
@@ -99,7 +102,7 @@ export function Register() {
                         </div>
 
                         <div className="form-group mb-3">
-                            <label htmlFor="btnPass">Contraseña: </label>
+                            <label htmlFor="btnPass">Contraseña</label>
                             <input
                                 type="password"
                                 placeholder="password"
@@ -111,13 +114,13 @@ export function Register() {
                         </div>
                         <button
                             className="btn btn-outline-primary w-100"
-                        >Registrar</button>
+                        >Registrarme</button>
                     </form>
                 </div>
 
                 <div className="w-100"></div>
 
-                <div className="col-12 col-md-6  d-flex justify-content-between my-1 px-4 ">
+                <div className="col-12 col-md-6 text-center my-1 px-4 ">
                     <Link to="/login">Ya tengo una cuenta</Link>
                 </div>
             </div>

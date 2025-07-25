@@ -1,8 +1,6 @@
 import { useState } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer"
-
 import { Link, useNavigate, Navigate } from "react-router-dom"
-
 
 const initialStateUser = {
     email: "",
@@ -10,11 +8,10 @@ const initialStateUser = {
 }
 
 export function Login() {
-    const [user, setUser] = useState(initialStateUser)
 
+    const [user, setUser] = useState(initialStateUser)
     const { dispatch, store } = useGlobalReducer()
     const navigate = useNavigate()
-
 
     const handleChange = ({ target }) => {
         setUser({
@@ -22,7 +19,6 @@ export function Login() {
             [target.name]: target.value
         })
     }
-
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -50,10 +46,13 @@ export function Login() {
             setTimeout(() => {
                 navigate("/")
             }, 2000)
+
         } else if (response.status === 400) {
             alert("Credenciales incorrectas")
+
         } else {
-            alert("Error al iniciar sesión comunicate con soporte")
+
+            alert("Error al iniciar sesión")
         }
 
     }
@@ -66,14 +65,14 @@ export function Login() {
     return (
         <div className="container">
             <div className="row justify-content-center">
-                <h2 className="text-center my-3">Ingresar a la plataforma :)</h2>
+                <h2 className="text-center my-3">Iniciar sesión</h2>
                 <div className="col-12 col-md-6" >
                     <form
                         className="border m-2 p-3"
                         onSubmit={handleSubmit}
                     >
                         <div className="form-group mb-3">
-                            <label htmlFor="btnEmail">Correo electronico: </label>
+                            <label htmlFor="btnEmail">Correo electronico</label>
                             <input
                                 type="text"
                                 placeholder="eldeimian@email.com"
@@ -85,7 +84,7 @@ export function Login() {
                             />
                         </div>
                         <div className="form-group mb-3">
-                            <label htmlFor="btnPass">Contraseña: </label>
+                            <label htmlFor="btnPass">Contraseña</label>
                             <input
                                 type="password"
                                 placeholder="password"
@@ -98,7 +97,7 @@ export function Login() {
                         </div>
                         <button
                             className="btn btn-outline-primary w-100"
-                        >Inicia Sesión</button>
+                        >Ingresar</button>
                     </form>
                 </div>
 
@@ -106,7 +105,7 @@ export function Login() {
 
                 <div className="col-12 col-md-6  d-flex justify-content-between my-1 px-4 ">
                     <Link to="/register">Registrarme</Link>
-                    <Link to="/recovery-password">Olvidaste tu contraseña ?</Link>
+                    <Link to="/recovery-password">Olvidé mi Contraseña</Link>
                 </div>
             </div>
         </div>

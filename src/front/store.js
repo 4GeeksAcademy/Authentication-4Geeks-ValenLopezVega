@@ -6,12 +6,6 @@ export const initialStore = () => {
 
 export default function storeReducer(store, action = {}) {
   switch (action.type) {
-    case "set_hello":
-      return {
-        ...store,
-        message: action.payload,
-      };
-
     case "LOGIN":
       return {
         ...store,
